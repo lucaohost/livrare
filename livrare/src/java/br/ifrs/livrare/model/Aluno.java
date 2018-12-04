@@ -24,8 +24,16 @@ public class Aluno implements Serializable {
     private String email;
     @Column(nullable = false, length = 100)
     private String matricula;
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Emprestimo> emprestimosFeitos = new ArrayList<>();
+
+    public List<Emprestimo> getEmprestimosFeitos() {
+        return emprestimosFeitos;
+    }
+
+    public void setEmprestimosFeitos(List<Emprestimo> emprestimosFeitos) {
+        this.emprestimosFeitos = emprestimosFeitos;
+    }*/
 
     public int getId() {
         return id;
@@ -116,7 +124,7 @@ public class Aluno implements Serializable {
 
     @Override
     public String toString() {
-        return "Aluno{" + "id=" + id + ", nome=" + nome + ", curso=" + curso + ", turma=" + turma + ", email=" + email + ", matricula=" + matricula + ", emprestimosFeitos=" + emprestimosFeitos + '}';
+        return "Aluno{" + "id=" + id + ", nome=" + nome + ", curso=" + curso + ", turma=" + turma + ", email=" + email + ", matricula=" + matricula + ", emprestimosFeitos=" +  + '}';
     }
     
     

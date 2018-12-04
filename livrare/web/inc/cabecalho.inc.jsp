@@ -37,7 +37,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="listlivros.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cadlivro.jsp">Adicionar</a>                      
+                                    <a class="dropdown-item" href="cadlivros.jsp">Adicionar</a>                      
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Alunos")) ? "active" : ""%>">
@@ -45,8 +45,8 @@
                                     Alunos <%= (pageName.equalsIgnoreCase("Alunos")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listaluno.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cadaluno.jsp">Adicionar</a>                      
+                                    <a class="dropdown-item" href="listalunos.jsp">Listar</a>
+                                    <a class="dropdown-item" href="cadalunos.jsp">Adicionar</a>                      
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Emprestimos")) ? "active" : ""%>">
@@ -54,8 +54,8 @@
                                     Empréstimos <%= (pageName.equalsIgnoreCase("Emprestimos")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listemprestimo.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cademprestimo.jsp">Adicionar</a>                      
+                                    <a class="dropdown-item" href="listemprestimos.jsp">Listar</a>
+                                    <a class="dropdown-item" href="cademprestimos.jsp">Adicionar</a>                      
                                 </div>
                             </li>
                             <li class="nav-item">
