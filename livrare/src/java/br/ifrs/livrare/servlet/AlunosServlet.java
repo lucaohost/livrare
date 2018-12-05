@@ -42,7 +42,9 @@ public class AlunosServlet extends HttpServlet {
         String matricula = request.getParameter("matricula") != null ? request.getParameter("matricula").trim() : "";
         String turma = request.getParameter("turma") != null ? request.getParameter("turma").trim() : "";
 
-        aluno.setId(id);
+        if(id != -1){
+            aluno.setId(id);
+        }
         aluno.setMatricula(matricula);
         aluno.setTurma(turma);
         aluno.setCurso(curso);

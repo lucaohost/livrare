@@ -24,7 +24,7 @@ public class Aluno implements Serializable {
     private String email;
     @Column(nullable = false, length = 100)
     private String matricula;
-    /*@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Emprestimo> emprestimosFeitos = new ArrayList<>();
 
     public List<Emprestimo> getEmprestimosFeitos() {
@@ -33,7 +33,7 @@ public class Aluno implements Serializable {
 
     public void setEmprestimosFeitos(List<Emprestimo> emprestimosFeitos) {
         this.emprestimosFeitos = emprestimosFeitos;
-    }*/
+    }
 
     public int getId() {
         return id;
