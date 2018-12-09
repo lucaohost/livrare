@@ -38,7 +38,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="listlivros.jsp">Listar</a>
                                     <a class="dropdown-item" href="cadlivros.jsp">Adicionar</a>
-                                    <a class="dropdown-item" href="gerenciarcategorias.jsp">Categorias</a>
+                                    <a class="dropdown-item" href="gercategorias.jsp">Categorias</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Alunos")) ? "active" : ""%>">

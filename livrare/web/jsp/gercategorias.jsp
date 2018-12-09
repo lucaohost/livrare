@@ -27,7 +27,7 @@
                                 <label class="control-label" for="curso">Cadastrar Categoria</label>  
                                 <div class="input-group">
                                     <input id="curso" name="curso" type="text" placeholder="Digite o nome da categoria" class="form-control" required="">
-                                    <button class="btn-success rounded-right">Salvar</button>
+                                    <button class="btn-primary rounded-right">Salvar</button>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                 <label class="control-label" for="curso">Pesquisar Categoria</label>  
                                 <div class="input-group">
                                     <input id="curso" name="curso" type="text" placeholder="Digite o nome da categoria" class="form-control">
-                                    <button class="input-group-addon" type="submit">
+                                    <button class="input-group-addon rounded-right" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
