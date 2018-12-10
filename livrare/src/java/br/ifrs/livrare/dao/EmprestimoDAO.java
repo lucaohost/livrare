@@ -53,7 +53,7 @@ public class EmprestimoDAO {
     
     public List<Emprestimo> pesquisar(String nome) throws Exception {
         this.em = EntityManagerProvider.getInstance();
-        TypedQuery<Emprestimo> query = this.em.createQuery(" Select c from Emprestimo c where lower(c.nome) like :nome order by c.nome",Emprestimo.class);
+        TypedQuery<Emprestimo> query = this.em.createQuery(" Select c from Emprestimo c left join Aluno a on a.id = c.aluno_id left join livro l on l.id = c.livro_unidade_id where lower(a.nome) like :nome or lower(l.nome) like :nome order by c.nome",Emprestimo.class);
         query.setParameter("nome", "%"+nome.toLowerCase()+"%");        
         List<Emprestimo> emprestimos = query.getResultList();
         this.em.close();

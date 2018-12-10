@@ -101,6 +101,11 @@ public class EmprestimoServlet extends HttpServlet {
                             + "</i>"
                             + "Alterar"
                             + "</a> | "
+                            + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
+                            + "<i class='fa fa-edit'>"
+                            + "</i>"
+                            + "Devolver"
+                            + "</a> | "
                             + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
                             + "<i class='fa fa-trash'></i>Excluir"
                             + "</a>"
@@ -128,8 +133,17 @@ public class EmprestimoServlet extends HttpServlet {
                 emprestimo = dao.obter(emprestimo.getId());
                 retorno = "true";
             } catch (Exception ex) {
-                retorno = "false";
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                retorno = ex.toString();
+            }
+        } else if(acao.equals("devolver")){
+            emprestimo.setEstado(estado);
+            try {
+                dao.atualizar(emprestimo);
+                retorno = "true";
+            } catch (Exception ex) {
+                Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                retorno = ex.toString();
             }
         } else {
             retorno = "Ação não definida!";
