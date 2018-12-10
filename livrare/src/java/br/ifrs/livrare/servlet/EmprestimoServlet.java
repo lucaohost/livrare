@@ -119,6 +119,48 @@ public class EmprestimoServlet extends HttpServlet {
 
             retorno += "</tbody>"
                     + "</table>";
+        } else if (acao.equals("atrasados")) {
+
+            retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
+                    + "                <thead class='thead-dark text-center'>"
+                    + "                    <tr>"
+                    + "                        <th>Livro</th>"
+                    + "                        <th>Aluno</th>"
+                    + "                        <th>Ação</th>"
+                    + "                    </tr>"
+                    + "                </thead>"
+                    + "                <tbody>";
+
+            try {
+                List<Emprestimo> emprestimos = dao.atrasados(pesquisa);
+                for (Emprestimo alu : emprestimos) {
+                    retorno += "<tr>"
+                            + "<td>" + alu.getAluno().getNome()+ "</td>"
+                            + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
+                            + "<td width='15%'>"
+                            + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
+                            + "<i class='fa fa-edit'>"
+                            + "</i>"
+                            + "Alterar"
+                            + "</a> | "
+                            + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
+                            + "<i class='fa fa-edit'>"
+                            + "</i>"
+                            + "Devolver"
+                            + "</a> | "
+                            + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
+                            + "<i class='fa fa-trash'></i>Excluir"
+                            + "</a>"
+                            + "</td>"
+                            + "</tr>";
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                retorno = ex.toString();
+            }
+
+            retorno += "</tbody>"
+                    + "</table>";
 
         } else if (acao.equals("excluir")) {
             try {

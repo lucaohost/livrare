@@ -2,9 +2,19 @@ buscar();
 
 function buscar() {
     $.ajax({
-        url: '../EmprestimosServlet',
+        url: '/livrare/EmprestimosServlet',
         method: "get",
         data: {pesquisa: $('#pesquisa').val(), acao: 'buscar'}
+    }).done(function (retorno) {
+        $('#listagem').html(retorno);
+    });
+}
+
+function buscarAtrasados() {
+    $.ajax({
+        url: '/livrare/EmprestimosServlet',
+        method: "get",
+        data: {pesquisa: $('#pesquisa').val(), acao: 'atrasados'}
     }).done(function (retorno) {
         $('#listagem').html(retorno);
     });
@@ -20,7 +30,7 @@ function excluir(id) {
     }).then((willDelete) => {
         if (willDelete) {
             $.ajax({
-                url: '../AlunosServlet',
+                url: '/livrare/EmprestimosServlet',
                 data: {id: id, acao: 'excluir'}
             }).done(function (retorno) {
                 if (retorno == 'true') {
@@ -40,12 +50,7 @@ function excluir(id) {
 }
 
 function alterar(id) {
-    $.ajax({
-        url: '../AlunosServlet',
-        data: {id: id, acao: 'atualizar'}
-    }).done(function (retorno) {
-        window.location.href = "cadalunos.jsp";
-    });
+    window.location.href = '/livrare/EmprestimoController?acao=atualizar&id=' + id;
 }
 
 function devolver(id) {
@@ -67,7 +72,7 @@ function devolver(id) {
             estado = "EXTRAVIADO";
         }
         $.ajax({
-            url: '../EmprestimoServlet',
+            url: '/livrare/EmprestimoServlet',
             data: {id: id, estdao: estado, acao: 'devolver'}
         }).done(function (retorno) {
             if (retorno == "true") {

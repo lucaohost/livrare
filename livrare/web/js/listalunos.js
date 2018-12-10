@@ -40,5 +40,5 @@ function excluir(id) {
 }
 
 function alterar(id) {
-     window.location.href = '/livrare/AlunoController?acao=atualizar&id=' + id;
+    window.location.href = '/livrare/AlunoController?acao=atualizar&id=' + id;
 }
