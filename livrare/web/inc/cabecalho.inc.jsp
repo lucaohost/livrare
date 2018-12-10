@@ -29,16 +29,16 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item <%= (pageName.equalsIgnoreCase("Home")) ? "active" : ""%>">
-                                <a class="nav-link" href="home.jsp">Home <%= (pageName.equalsIgnoreCase("Home")) ? "<span class='sr-only'>(current)</span>" : ""%></a>
+                                <a class="nav-link" href="/livrare/jsp/home.jsp">Home <%= (pageName.equalsIgnoreCase("Home")) ? "<span class='sr-only'>(current)</span>" : ""%></a>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Livros")) ? "active" : ""%>">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Livros <%= (pageName.equalsIgnoreCase("Livros")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listlivros.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cadlivros.jsp">Adicionar</a>
-                                    <a class="dropdown-item" href="gercategorias.jsp">Categorias</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/listlivros.jsp">Listar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadlivros.jsp">Adicionar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/gercategorias.jsp">Categorias</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Alunos")) ? "active" : ""%>">
@@ -46,8 +46,8 @@
                                     Alunos <%= (pageName.equalsIgnoreCase("Alunos")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listalunos.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cadalunos.jsp">Adicionar</a>                      
+                                    <a class="dropdown-item" href="/livrare/jsp/listalunos.jsp">Listar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadalunos.jsp">Adicionar</a>                      
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Emprestimos")) ? "active" : ""%>">
@@ -55,12 +55,12 @@
                                     Empréstimos <%= (pageName.equalsIgnoreCase("Emprestimos")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listemprestimos.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cademprestimos.jsp">Adicionar</a>                      
+                                    <a class="dropdown-item" href="/livrare/jsp/listemprestimos.jsp">Listar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cademprestimos.jsp">Adicionar</a>                      
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="UsuarioController?acao=sair">Sair</a>
+                                <a class="nav-link" href="/livrare/UsuarioController?acao=sair">Sair</a>
                             </li>
                         </ul>
                     </div>

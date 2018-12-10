@@ -120,7 +120,7 @@ public class AlunosServlet extends HttpServlet {
             }
         } else if (acao.equals("atualizar")) {
             try {
-                aluno = dao.obter(aluno.getId());
+                dao.atualizar(aluno);
                 retorno = "true";
             } catch (Exception ex) {
                 retorno = "false";
