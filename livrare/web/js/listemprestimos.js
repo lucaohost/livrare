@@ -2,7 +2,7 @@ buscar();
 
 function buscar() {
     $.ajax({
-        url: '../AlunosServlet',
+        url: '../EmprestimosServlet',
         method: "get",
         data: {pesquisa: $('#pesquisa').val(), acao: 'buscar'}
     }).done(function (retorno) {

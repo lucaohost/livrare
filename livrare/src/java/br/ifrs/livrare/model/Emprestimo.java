@@ -1,6 +1,7 @@
 package br.ifrs.livrare.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -21,7 +22,27 @@ public class Emprestimo implements Serializable {
     @Column(nullable = false, length = 10)
     String estado;
     @Column
-    boolean ativo;
+    private boolean ativo;
+    @Column
+    private String datade;
+    @Column
+    private String dataate;
+
+    public String getDatade() {
+        return datade;
+    }
+
+    public void setDatade(String datade) {
+        this.datade = datade;
+    }
+
+    public String getDataate() {
+        return dataate;
+    }
+
+    public void setDataate(String dataate) {
+        this.dataate = dataate;
+    }
 
     public int getId() {
         return id;
