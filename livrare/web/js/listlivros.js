@@ -24,8 +24,6 @@ $(function () {
         });
     }
 
-//    buscar();
-
     function buscar() {
         $.ajax({
             url: '/livrare/LivrosDidaticosServlet',
