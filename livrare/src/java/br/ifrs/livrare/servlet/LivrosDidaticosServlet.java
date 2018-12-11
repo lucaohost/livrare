@@ -93,7 +93,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
                         + "                        <th>Ação</th>"
                         + "                    </tr>"
                         + "                </thead>"
-                        + "                <tbody>";
+                        + "                <tbody class='text-center'>";
 
                 List<LivroDidatico> livros = dao.pesquisar(pesquisa);
                 for (LivroDidatico liv : livros) {
@@ -103,7 +103,9 @@ public class LivrosDidaticosServlet extends HttpServlet {
                             + "<td width='15%'>" + liv.getVolume() + "</td>"
                             + "<td width='15%'>" + liv.getCategoria().getNome() + "</td>"
                             + "<td width='15%'>" + liv.getIsbn() + "</td>"
-                            + "<td width='15%'>" + liv.getLivros().size() + "</td>"
+                            + "<td width='15%'>" + "<a class='text-dark' href='/livrare/LivrosDidaticosServlet?acao=gerunidades&id=" + liv.getId() + "'>"
+                            + liv.getLivros().size()
+                            + "</a>" + "</td>"
                             + "<td width='15%'>"
                             + "<a class='text-dark' href='/livrare/LivrosDidaticosServlet?acao=atualizar&id=" + liv.getId() + "'"
                             + "<i class='fa fa-edit'>"
@@ -127,6 +129,16 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 List<Categoria> categorias = daoCat.pesquisar("");
                 request.setAttribute("categorias", categorias);
                 RequestDispatcher view = request.getRequestDispatcher("/jsp/cadlivros.jsp");
+                view.forward(request, response);
+            }
+            if (acao.equals("gerunidades")) {
+                long idLivroDidatico = Long.parseLong(request.getParameter("id"));
+                LivroDidatico livroDidatico = dao.obter(idLivroDidatico);
+                request.setAttribute("livro", livroDidatico);
+                CategoriaDAO daoCat = new CategoriaDAO();
+                List<Categoria> categorias = daoCat.pesquisar("");
+                request.setAttribute("categorias", categorias);
+                RequestDispatcher view = request.getRequestDispatcher("/jsp/gerunidades.jsp");
                 view.forward(request, response);
             }
         } catch (Exception e) {

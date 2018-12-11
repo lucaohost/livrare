@@ -19,7 +19,7 @@ public class LivroUnidade implements Serializable {
     private LivroDidatico livro = new LivroDidatico();  
     @Column(nullable = false, length = 250)
     private String codigoDeBarras;
-    @OneToMany(mappedBy = "livroAlocado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "livroAlocado", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Emprestimo> emprestimosEnvolvidos = new ArrayList<>();
 
     public int getId() {

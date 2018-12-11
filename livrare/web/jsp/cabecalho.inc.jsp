@@ -37,7 +37,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/livrare/jsp/listlivros.jsp">Listar</a>
-                                    <a class="dropdown-item" href="/livrare/jsp/cadlivros.jsp">Adicionar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadlivros.jsp">Cadastrar</a>
                                     <a class="dropdown-item" href="/livrare/jsp/gercategorias.jsp">Categorias</a>
                                 </div>
                             </li>
