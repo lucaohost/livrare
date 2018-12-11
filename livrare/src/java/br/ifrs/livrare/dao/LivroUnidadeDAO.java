@@ -44,5 +44,13 @@ public class LivroUnidadeDAO {
         this.em.close();
         return livros.get(0);
     }
+    
+     public int obterUltimoId() throws Exception {
+        this.em = EntityManagerProvider.getInstance();
+        TypedQuery<LivroUnidade> query = this.em.createQuery(" Select c from LivroUnidade c order by c.id desc", LivroUnidade.class);
+        List<LivroUnidade> livros = query.getResultList();
+        this.em.close();
+        return livros.get(0).getId();
+    }
 
 }
