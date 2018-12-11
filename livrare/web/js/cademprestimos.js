@@ -4,7 +4,7 @@ listAlunos();
 $('#salvar').click(function () {
     $.ajax({
         url: '/livrare/EmprestimosServlet',
-        data: {id: $('#id').val(), livro: $('#livro').val(), aluno: $('#aluno').val(), codigoBarras: $('#codigoBarras').val(), anode: $('#anoDe').val(), anoate: $('#anoAte').val(), status: $('#status').val(), acao: 'salvar'}
+        data: {id: $('#id').val(), livro: $('#livroUnidade').val(), aluno: $('#aluno').val(), codigoBarras: $('#codigoBarras').val(), anode: $('#anoDe').val(), anoate: $('#anoAte').val(), status: $('#status').val(), acao: 'salvar'}
     }).done(function (retorno) {
         if (retorno == "true" && $('#id').val() == '') {
             swal({
@@ -71,5 +71,14 @@ function listAlunos() {
         data: {acao: "select"}
     }).done(function (retorno) {
         $('#selectAlunos').html(retorno);
+    });
+}
+
+function atualizarUnidades(){
+     $.ajax({
+        url: '/livrare/LivrosUnidadesServlet',
+        data: {acao: "select", idLivro: $('#livro').val()}
+    }).done(function (retorno) {
+        $('#selectUnidades').html(retorno);
     });
 }

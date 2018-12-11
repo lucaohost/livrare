@@ -42,30 +42,23 @@ public class EmprestimoServlet extends HttpServlet {
         String retorno = "false";
 
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id").trim()) : 0;
-        String codigoBarras = request.getParameter("codigoBarras") != null ? request.getParameter("codigoBarras") : "";
         int alunoId = request.getParameter("aluno") != null ? Integer.parseInt(request.getParameter("aluno")) : 0;
         Aluno aluno = new Aluno();
         aluno.setId(alunoId);
-        int livroId = request.getParameter("livro") != null ? Integer.parseInt(request.getParameter("livro")) : 0;
+        int livroId = request.getParameter("livroUnidade") != null ? Integer.parseInt(request.getParameter("livroUnidade")) : 0;
         LivroUnidade livro = new LivroUnidade();
         livro.setId(livroId);
         boolean ativo = request.getParameter("status") != null ?Boolean.parseBoolean(request.getParameter("status")):false;
-        String datade = request.getParameter("datade") != null ? request.getParameter("datade").trim() : "";
-        String dataate = request.getParameter("dataate") != null ? request.getParameter("dataate").trim() : "";
+        int anode = request.getParameter("anode") != null ? Integer.parseInt(request.getParameter("anode").trim()) : 0;
+        int anoate = request.getParameter("anoate") != null ? Integer.parseInt(request.getParameter("anoate").trim()) : 0;
         String estado = request.getParameter("estado") != null ? request.getParameter("estado").trim() : "";
-
-        try {
-            livroUnidade = daoUnidade.obterPorCodigo(codigoBarras);
-        } catch (Exception ex) {
-            Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         emprestimo.setId(id);
         emprestimo.setAluno(aluno);
-        emprestimo.setLivroAlocado(livroUnidade);
+        emprestimo.setLivroAlocado(livro);
         emprestimo.setAtivo(ativo);
-        emprestimo.setDatade(datade);
-        emprestimo.setDataate(dataate);
+        emprestimo.setAnode(anode);
+        emprestimo.setAnoate(anoate);
         emprestimo.setEstado(estado);
 
         if (acao.equals("salvar")) {
@@ -143,7 +136,7 @@ public class EmprestimoServlet extends HttpServlet {
                     + "                <tbody>";
 
             try {
-                List<Emprestimo> emprestimos = dao.atrasados(pesquisa);
+                List<Emprestimo> emprestimos = dao.atrasados();
                 for (Emprestimo alu : emprestimos) {
                     retorno += "<tr>"
                             + "<td>" + alu.getAluno().getNome()+ "</td>"

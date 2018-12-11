@@ -141,6 +141,15 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("/jsp/gerunidades.jsp");
                 view.forward(request, response);
             }
+            if (acao.equals("select")) {
+                retorno = "<select id='livro' class='form-control' onchange='atualizarUnidades()'>";
+                retorno += "<option value=''>Selecione...</option>";
+                List<LivroDidatico> livros = dao.pesquisar("");
+                for (LivroDidatico liv : livros) {
+                    retorno += "<option value='"+liv.getId()+"'>"+liv.getNome()+"</option>";
+                }
+                retorno += "</select>";
+            }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);
             retorno = e.toString();

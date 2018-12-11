@@ -38,15 +38,15 @@
                     </div>    
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="control-label" >CÃ³digo de barras</label>  
-                            <input class="form-control" id="codigoBarras">
+                            <label class="control-label">Livro Unidade (Código de barras)</label>  
+                            <div id="selectUnidades"></div>
                         </div>
                     </div>
                     <div class="form-row">
                        <div class="form-group col-md-6">
                             <label class="control-label">Ano de</label> <br>
-                            <input type="number" id="anoDe" class="form-control" value="${emprestimo.anode!=null?emprestimo.anode:""}">>
-                            <label class="control-label">Ano atÃ©</label> <br>
+                            <input type="number" id="anoDe" class="form-control" value="${emprestimo.anode!=null?emprestimo.anode:""}">
+                            <label class="control-label">Ano até</label> <br>
                             <input type="number" id="anoAte" class="form-control" value="${emprestimo.anoate!=null?emprestimo.anoate:""}">
                         </div>
                         <div class="form-group col-md-6">

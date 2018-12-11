@@ -7,6 +7,7 @@ package br.ifrs.livrare.servlet;
 
 import br.ifrs.livrare.dao.AlunoDAO;
 import br.ifrs.livrare.model.Aluno;
+import br.ifrs.livrare.model.Emprestimo;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -138,6 +139,46 @@ public class AlunosServlet extends HttpServlet {
             }catch(Exception ex) {
                 retorno = ex.toString();
             }
+        } else if (acao.equals("emprestimos")) {
+            Aluno aluno1;
+            try {
+                 retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
+                    + "                <thead class='thead-dark text-center'>"
+                    + "                    <tr>"
+                    + "                        <th>Livro</th>"
+                    + "                        <th>Aluno</th>"
+                    + "                        <th>Ação</th>"
+                    + "                    </tr>"
+                    + "                </thead>"
+                    + "                <tbody>";
+                aluno1 = dao.obter(id);
+                List<Emprestimo> emprestimos = aluno1.getEmprestimosFeitos();
+                for(Emprestimo emp : emprestimos){
+                     retorno += "<tr>"
+                            + "<td>" + emp.getAluno().getNome()+ "</td>"
+                            + "<td width='15%'>" + emp.getLivroAlocado().getLivro().getNome() + "</td>"
+                            + "<td width='15%'>"
+                            + "<a class='text-dark' href='#' onclick='alterar(" + emp.getId() + ");'>"
+                            + "<i class='fa fa-edit'>"
+                            + "</i>"
+                            + "Alterar"
+                            + "</a> | "
+                            + "<a class='text-dark' href='#' onclick='devolver(" + emp.getId() + ");'>"
+                            + "<i class='fa fa-edit'>"
+                            + "</i>"
+                            + "Devolver"
+                            + "</a> | "
+                            + "<a class='text-dark' href='#' onclick='excluir(" + emp.getId() + ");'>"
+                            + "<i class='fa fa-trash'></i>Excluir"
+                            + "</a>"
+                            + "</td>"
+                            + "</tr>";
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            retorno += "</tbody>"
+                    + "</table>";
         } else {
             retorno = "Ação não definida!";
         }

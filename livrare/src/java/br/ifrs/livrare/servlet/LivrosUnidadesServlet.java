@@ -63,5 +63,32 @@ public class LivrosUnidadesServlet extends HttpServlet {
             retorno = e.toString();
         }
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LivroDidaticoDAO dao = new LivroDidaticoDAO();
+        String acao = request.getParameter("acao").trim();
+        Long id = Long.parseLong(request.getParameter("id").trim());
+        String retorno = "false";
+
+        try {
+            if (acao.equals("select")) {
+                retorno = "<select id='livroUnidade' class='form-control'>";
+                retorno += "<option value=''>Selecione...</option>";
+                LivroDidatico livroD = dao.obter(id);
+                List<LivroUnidade> livrosUnidades = livroD.getLivros();
+                for (LivroUnidade liv : livrosUnidades) {
+                    retorno += "<option value='"+liv.getId()+"'>"+liv.getCodigoDeBarras()+"</option>";
+                }
+                retorno += "</select>";
+            }
+        } catch (Exception e) {
+            Logger.getLogger(LivrosUnidadesServlet.class.getName()).log(Level.SEVERE, null, e);
+            retorno = e.toString();
+        }
+
+        response.setContentType("text/plain");
+        response.getWriter().write(retorno);
+    }
 
 }

@@ -24,24 +24,24 @@ public class Emprestimo implements Serializable {
     @Column
     private boolean ativo;
     @Column
-    private String datade;
+    private int anode;
     @Column
-    private String dataate;
+    private int anoate;
 
-    public String getDatade() {
-        return datade;
+    public int getAnode() {
+        return anode;
     }
 
-    public void setDatade(String datade) {
-        this.datade = datade;
+    public void setAnode(int anode) {
+        this.anode = anode;
     }
 
-    public String getDataate() {
-        return dataate;
+    public int getAnoate() {
+        return anoate;
     }
 
-    public void setDataate(String dataate) {
-        this.dataate = dataate;
+    public void setAnoate(int anoate) {
+        this.anoate = anoate;
     }
 
     public int getId() {

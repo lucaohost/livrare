@@ -1,4 +1,6 @@
 buscar();
+listAlunos();
+listLivros();
 
 function buscar() {
     $.ajax({
@@ -89,3 +91,35 @@ function devolver(id) {
         });
     });
 }
+
+function listLivros() {
+    $.ajax({
+        url: '/livrare/LivrosDidaticosServlet',
+        data: {acao: "select"}
+    }).done(function (retorno) {
+        $('#selectLivros').html(retorno);
+    });
+}
+
+function listAlunos() {
+    $.ajax({
+        url: '/livrare/AlunosServlet',
+        data: {acao: "select"}
+    }).done(function (retorno) {
+        $('#selectAlunos').html(retorno);
+    });
+}
+
+$('#aluno').change(function(){
+    $.ajax({
+        url: '/livrare/AlunosServlet',
+        method: "get",
+        data: {pesquisa: $('#pesquisa').val(), acao: 'emprestimos'}
+    }).done(function (retorno) {
+        $('#listagem').html(retorno);
+    });
+});
+
+$('#aluno').change(function(){
+    
+});
