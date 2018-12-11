@@ -1,5 +1,30 @@
 $(function () {
-    buscar();
+    validarSession();
+
+    function validarSession() {
+        $.ajax({
+            url: '/livrare/UsuariosServlet?acao=validarsessao',
+            method: "GET"
+        }).done(function (retorno) {
+            if (retorno === "false") {
+                swal({
+                    title: "Alerta!",
+                    text: "Acesso Restrito!",
+                    icon: "warning",
+                    buttons: {
+                        ok: "Ok"
+                    },
+                    dangerMode: true,
+                }).then((value) => {
+                    window.location.href = "/livrare/jsp/login.jsp";
+                });
+            } else {
+                buscar();
+            }
+        });
+    }
+
+//    buscar();
 
     function buscar() {
         $.ajax({

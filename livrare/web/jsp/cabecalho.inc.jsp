@@ -60,7 +60,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/livrare/UsuarioController?acao=sair">Sair</a>
+                                <a class="nav-link" href="/livrare/UsuariosServlet?acao=sair">Sair</a>
                             </li>
                         </ul>
                     </div>

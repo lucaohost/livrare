@@ -1,19 +1,21 @@
+<%@page import="br.ifrs.livrare.servlet.UsuariosServlet"%>
+<%@page import="br.ifrs.livrare.dao.UsuarioDAO"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<c:import url="inc/cabecalho.inc.jsp">
+<c:import url="cabecalho.inc.jsp">
     <c:param name="pageName" value="Login" />
 </c:import>
 
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="panel-title text-center">Gestão de Livros</h2>
+            <h2 class="panel-title text-center">Login</h2>
         </div>
         <div class="panel-body">
             <c:out value="${mensagem}" escapeXml="false"/>
 
-            <form action="UsuariosServlet" method="post" class="form-horizontal">
+            <form action="../UsuariosServlet" method="post" class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
                         <div class="form-group">
@@ -26,6 +28,7 @@
                         <div class="form-group">
                             <label class="control-label" for="senha">Senha:</label>  
                             <input id="senha" name="senha" type="password" class="form-control" required="" maxlength="30">
+                            <input id="acao" name="acao" type="hidden" class="form-control" value="logar">
                         </div>
                     </div>
                     <div class="form-row">
@@ -43,5 +46,4 @@
         </div>
     </div>
 </div>
-<jsp:include page="inc/rodape.inc.jsp" />
-<script src="js/login.js"></script>
+<jsp:include page="rodape.inc.jsp" />
