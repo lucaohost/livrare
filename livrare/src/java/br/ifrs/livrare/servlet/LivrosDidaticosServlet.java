@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,6 @@ public class LivrosDidaticosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LivroDidaticoDAO dao = new LivroDidaticoDAO();
-        Gson gson = new Gson();
         String acao = request.getParameter("acao").trim();
         String retorno = "false";
 
@@ -43,17 +43,26 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 livro.setFotoCapa("link");
                 dao.salvar(livro);
                 retorno = "true";
-            } 
-//            else if (acao.equals("excluir")) {
-//                long id = Long.parseLong(request.getParameter("id"));
-//                dao.excluir(id);
-//                retorno = "true";
-//            } else if (acao.equals("atualizar")) {
-//                String categoriaJson = request.getParameter("categoriaJson");
-//                Categoria categoriaAtualizar = gson.fromJson(categoriaJson, Categoria.class);
-//                dao.atualizar(categoriaAtualizar);
-//                retorno = "true";
-//            }
+            } else if (acao.equals("excluir")) {
+                long id = Long.parseLong(request.getParameter("id"));
+                dao.excluir(id);
+                retorno = "true";
+            } else if (acao.equals("atualizar")) {
+                LivroDidatico livro = new LivroDidatico();
+                livro.setId(Long.parseLong(request.getParameter("id")));
+                Categoria categoria = new Categoria();
+                Long idCategoria = Long.parseLong(request.getParameter("categoria"));
+                categoria.setId(idCategoria);
+                livro.setCategoria(categoria);
+                livro.setIsbn(request.getParameter("isbn"));
+                livro.setAutor(request.getParameter("autor"));
+                livro.setNome(request.getParameter("nome"));
+                livro.setVolume(request.getParameter("volume"));
+                livro.setFotoCapa("link");
+                String categoriaJson = request.getParameter("categoriaJson");
+                dao.atualizar(livro);
+                retorno = "true";
+            }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);
             retorno = e.toString();
@@ -90,13 +99,13 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 for (LivroDidatico liv : livros) {
                     retorno += "<tr>"
                             + "<td>" + liv.getNome() + "</td>"
-                            + "<td width='15%'>" + liv.getAutor()+ "</td>"
-                            + "<td width='15%'>" + liv.getVolume()+ "</td>"
-                            + "<td width='15%'>" + liv.getCategoria().getNome()+ "</td>"
-                            + "<td width='15%'>" + liv.getIsbn()+ "</td>"
-                            + "<td width='15%'>" + liv.getLivros().size()+ "</td>"
+                            + "<td width='15%'>" + liv.getAutor() + "</td>"
+                            + "<td width='15%'>" + liv.getVolume() + "</td>"
+                            + "<td width='15%'>" + liv.getCategoria().getNome() + "</td>"
+                            + "<td width='15%'>" + liv.getIsbn() + "</td>"
+                            + "<td width='15%'>" + liv.getLivros().size() + "</td>"
                             + "<td width='15%'>"
-                            + "<a class='text-dark' href='#' onclick='alterar(" + liv.getId() + ");'>"
+                            + "<a class='text-dark' href='/livrare/LivrosDidaticosServlet?acao=atualizar&id=" + liv.getId() + "'"
                             + "<i class='fa fa-edit'>"
                             + "</i>"
                             + "Alterar"
@@ -109,7 +118,17 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 }
                 retorno += "</tbody>"
                         + "</table>";
-                }
+            }
+            if (acao.equals("atualizar")) {
+                long idLivroDidatico = Long.parseLong(request.getParameter("id"));
+                LivroDidatico livroDidatico = dao.obter(idLivroDidatico);
+                request.setAttribute("livro", livroDidatico);
+                CategoriaDAO daoCat = new CategoriaDAO();
+                List<Categoria> categorias = daoCat.pesquisar("");
+                request.setAttribute("categorias", categorias);
+                RequestDispatcher view = request.getRequestDispatcher("/jsp/cadlivros.jsp");
+                view.forward(request, response);
+            }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);
             retorno = e.toString();

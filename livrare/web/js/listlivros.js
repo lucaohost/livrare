@@ -10,8 +10,8 @@ $(function () {
             $('#listagem').html(retorno);
         });
     }
-    
-    $("#pesquisar").click(function(){
+
+    $("#pesquisar").click(function () {
         buscar();
     });
 })

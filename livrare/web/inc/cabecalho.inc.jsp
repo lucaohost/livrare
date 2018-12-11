@@ -36,10 +36,10 @@
                                     Livros <%= (pageName.equalsIgnoreCase("Livros")) ? "<span class='sr-only'>(current)</span>" : ""%>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="listlivros.jsp">Listar</a>
-                                    <a class="dropdown-item" href="cadlivros.jsp">Cadastrar</a>
-                                    <a class="dropdown-item" href="cadlivros.jsp">Adicionar</a>
-                                    <a class="dropdown-item" href="gercategorias.jsp">Categorias</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/listlivros.jsp">Listar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadlivros.jsp">Cadastrar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadlivros.jsp">Adicionar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/gercategorias.jsp">Categorias</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Alunos")) ? "active" : ""%>">

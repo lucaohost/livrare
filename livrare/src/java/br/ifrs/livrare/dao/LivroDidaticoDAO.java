@@ -1,7 +1,6 @@
 package br.ifrs.livrare.dao;
 
 import br.ifrs.livrare.model.LivroDidatico;
-import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -44,6 +43,13 @@ public class LivroDidaticoDAO {
         List<LivroDidatico> livros = query.getResultList();
         this.em.close();
         return livros;
+    }
+    
+    public LivroDidatico obter(long id) throws Exception {
+        this.em = EntityManagerProvider.getInstance();
+        LivroDidatico livroDidatico = this.em.find(LivroDidatico.class, id);
+        this.em.close();
+        return livroDidatico;
     }
 
 }

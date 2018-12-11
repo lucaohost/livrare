@@ -29,13 +29,14 @@
                         <input id="nome" name="nome" type="text" placeholder="Digite o nome do Livro" class="form-control" required="" value="${livro.nome!=null?livro.nome:""}">
                     </div>
                     <div class="form-group col-md-4">
+                        <input type="hidden" name="idCategoriaAntigo" id="idCategoriaAntigo" value="${livro.categoria.id!=null?livro.categoria.id:""}">
                         <label class="control-label" for="categoria">Categoria:</label>
                         <select id="categoria" name="categoria" class="form-control">
-                            <c:forEach var="categoria" items="${categorias}"> 
+                            <c:forEach var="categoria" items="${categorias}">
                                 <option value='${categoria.id}'>${categoria.nome}</option> 
                             </c:forEach>
                         </select>
-                    </div>   
+                    </div>
                     <div class="form-group col-md-4">
                         <label class="control-label" for="turma">ISBN</label>  
                         <input id="isbn" name="isbn" type="text" placeholder="Digite o ISBN do livro" class="form-control" required="" value="${livro.isbn!=null?livro.isbn:""}">
@@ -68,7 +69,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label" for="cancelar"></label>
-                        <button id="cancelar" name="cancelar" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href = 'listlivros.jsp'" type="button">Cancelar</button>
+                        <button id="cancelar" name="cancelar" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href = '/livrare/jsp/listlivros.jsp'" type="button">Cancelar</button>
                     </div>
                 </div>   
             </fieldset>
@@ -78,3 +79,48 @@
 <!-- Rodapé da Página -->
 <jsp:include page="../inc/rodape.inc.jsp" />
 <script src="../js/cadlivros.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    if($('#idCategoriaAntigo').val() !== ""){
+        $('#categoria').val($('#idCategoriaAntigo').val());
+        $('#salvar').html("Alterar");
+        $('#salvar').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'LivrosDidaticosServlet',
+                data: {
+                    acao: "atualizar",
+                    id: $('#id').val() != '' ? $('#id').val() : '',
+                    nome: $('#nome').val() != '' ? $('#nome').val() : '',
+                    categoria: $('#categoria').val() != '' ? $('#categoria').val() : '',
+                    autor: $('#autor').val() != '' ? $('#autor').val() : '',
+                    volume: $('#volume').val() != '' ? $('#volume').val() : '',
+                    isbn: $('#isbn').val() != '' ? $('#isbn').val() : '',
+                }
+            }).done(function (retorno) {
+                if (retorno == "true") {
+                    swal({
+                        title: "Sucesso!",
+                        text: "Aluno atualizado com sucesso!",
+                        icon: "success",
+                        buttons: {
+                            listagem: {
+                                text: "Ir para listagem",
+                                className: "btn-secondary"
+                            },
+                            ok: "Ok"
+                        },
+                        dangerMode: true,
+                    }).then((value) => {
+                        if (value == 'listagem') {
+                            window.location.href = "/livrare/jsp/listlivros.jsp";
+                        } else {
+                            limparCampos();
+                        }
+                    });
+                } else {
+                    swal("Erro!", "Algo de errado aconteceu: " + retorno, "error");
+                }
+            });
+        });
+    }
+</script>
