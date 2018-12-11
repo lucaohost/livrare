@@ -129,6 +129,7 @@ public class AlunosServlet extends HttpServlet {
         } else if (acao.equals("select")) {
             try {
                 retorno = "<select id='aluno' class='form-control'>";
+                retorno += "<option value=''>Selecione...</option>";
                 List<Aluno> alunos = dao.pesquisar(pesquisa);
                 for (Aluno alu : alunos) {
                     retorno += "<option value='"+alu.getId()+"'>"+alu.getNome()+"</option>";

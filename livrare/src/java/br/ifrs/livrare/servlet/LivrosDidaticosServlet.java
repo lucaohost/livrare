@@ -43,7 +43,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 livro.setFotoCapa("link");
                 dao.salvar(livro);
                 retorno = "true";
-            }
+            } 
 //            else if (acao.equals("excluir")) {
 //                long id = Long.parseLong(request.getParameter("id"));
 //                dao.excluir(id);
@@ -109,7 +109,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 }
                 retorno += "</tbody>"
                         + "</table>";
-            }
+                }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);
             retorno = e.toString();

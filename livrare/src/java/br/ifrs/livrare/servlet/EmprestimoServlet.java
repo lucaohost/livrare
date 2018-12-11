@@ -6,6 +6,7 @@
 package br.ifrs.livrare.servlet;
 
 import br.ifrs.livrare.dao.EmprestimoDAO;
+import br.ifrs.livrare.dao.LivroUnidadeDAO;
 import br.ifrs.livrare.model.Aluno;
 import br.ifrs.livrare.model.Emprestimo;
 import br.ifrs.livrare.model.LivroUnidade;
@@ -32,26 +33,36 @@ public class EmprestimoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EmprestimoDAO dao = new EmprestimoDAO();
         Emprestimo emprestimo = new Emprestimo();
+        
+        LivroUnidadeDAO daoUnidade = new LivroUnidadeDAO();
+        LivroUnidade livroUnidade = new LivroUnidade();
 
         String acao = request.getParameter("acao").trim();
         String pesquisa = request.getParameter("pesquisa") != null ? request.getParameter("pesquisa").trim() : "";
         String retorno = "false";
 
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id").trim()) : 0;
-        int alunoId = request.getParameter("alunoId") != null ? Integer.parseInt(request.getParameter("alunoId")) : 0;
+        String codigoBarras = request.getParameter("codigoBarras") != null ? request.getParameter("codigoBarras") : "";
+        int alunoId = request.getParameter("aluno") != null ? Integer.parseInt(request.getParameter("aluno")) : 0;
         Aluno aluno = new Aluno();
         aluno.setId(alunoId);
-        int livroId = request.getParameter("livroId") != null ? Integer.parseInt(request.getParameter("livroId")) : 0;
+        int livroId = request.getParameter("livro") != null ? Integer.parseInt(request.getParameter("livro")) : 0;
         LivroUnidade livro = new LivroUnidade();
         livro.setId(livroId);
-        boolean ativo = request.getParameter("ativo") != null ?Boolean.parseBoolean(request.getParameter("ativo")):false;
+        boolean ativo = request.getParameter("status") != null ?Boolean.parseBoolean(request.getParameter("status")):false;
         String datade = request.getParameter("datade") != null ? request.getParameter("datade").trim() : "";
         String dataate = request.getParameter("dataate") != null ? request.getParameter("dataate").trim() : "";
         String estado = request.getParameter("estado") != null ? request.getParameter("estado").trim() : "";
 
+        try {
+            livroUnidade = daoUnidade.obterPorCodigo(codigoBarras);
+        } catch (Exception ex) {
+            Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         emprestimo.setId(id);
         emprestimo.setAluno(aluno);
-        emprestimo.setLivroAlocado(livro);
+        emprestimo.setLivroAlocado(livroUnidade);
         emprestimo.setAtivo(ativo);
         emprestimo.setDatade(datade);
         emprestimo.setDataate(dataate);
