@@ -73,7 +73,7 @@ function devolver(id) {
         }
         $.ajax({
             url: '/livrare/EmprestimoServlet',
-            data: {id: id, estdao: estado, acao: 'devolver'}
+            data: {id: id, estado: estado, acao: 'devolver'}
         }).done(function (retorno) {
             if (retorno == "true") {
                 swal({
