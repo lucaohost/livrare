@@ -110,7 +110,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
                             + "</i>"
                             + "Alterar"
                             + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='excluir(" + liv.getId() + ");'>"
+                            + "<a class='text-dark excluir' href='#' idLivro='" + liv.getId() + "'>"
                             + "<i class='fa fa-trash'></i>Excluir"
                             + "</a>"
                             + "</td>"

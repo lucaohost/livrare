@@ -45,7 +45,7 @@ $(function () {
                     dangerMode: true,
                 }).then((value) => {
                     if (value == 'listagem') {
-                        window.location.href = "listalunos.jsp";
+                        window.location.href = "listlivros.jsp";
                     } else {
                         limparCampos();
                     }
@@ -65,7 +65,7 @@ $(function () {
                     dangerMode: true,
                 }).then((value) => {
                     if (value == 'listagem') {
-                        window.location.href = "listalunos.jsp";
+                        window.location.href = "listlivros.jsp";
                     } else {
                         limparCampos();
                     }
