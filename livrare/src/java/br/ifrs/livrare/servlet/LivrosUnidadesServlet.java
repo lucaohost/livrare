@@ -4,6 +4,7 @@ import br.ifrs.livrare.dao.CategoriaDAO;
 import br.ifrs.livrare.dao.LivroDidaticoDAO;
 import br.ifrs.livrare.dao.LivroUnidadeDAO;
 import br.ifrs.livrare.model.Categoria;
+import br.ifrs.livrare.model.Emprestimo;
 import br.ifrs.livrare.model.LivroDidatico;
 import br.ifrs.livrare.model.LivroUnidade;
 import com.google.gson.Gson;
@@ -78,7 +79,9 @@ public class LivrosUnidadesServlet extends HttpServlet {
                 LivroDidatico livroD = dao.obter(id);
                 List<LivroUnidade> livrosUnidades = livroD.getLivros();
                 for (LivroUnidade liv : livrosUnidades) {
-                    retorno += "<option value='"+liv.getId()+"'>"+liv.getCodigoDeBarras()+"</option>";
+                    if(liv.getEmprestimosEnvolvidos().size() <= 0) {
+                        retorno += "<option value='"+liv.getId()+"'>"+liv.getCodigoDeBarras()+"</option>";
+                    }
                 }
                 retorno += "</select>";
             }
