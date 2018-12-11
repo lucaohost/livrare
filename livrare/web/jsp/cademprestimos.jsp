@@ -1,23 +1,23 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 
-<!-- Verifica as condiÁıes de acesso ao sistema -->
+<!-- Verifica as condi√ß√µes de acesso ao sistema -->
 <!-- include_once './inc/acesso.inc.php'; -->
-<!-- CabeÁalho da P·gina -->
+<!-- Cabe√ßalho da P√°gina -->
 <c:import url="../inc/cabecalho.inc.jsp">
     <c:param name="pageName" value="Emprestimos" />
 </c:import>
 
-<!-- Conte˙do da P·gina -->
+<!-- Conte√∫do da P√°gina -->
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="panel-title text-center">Gest„o de Emprestimos</h2>
+            <h2 class="panel-title text-center">Gest√£o de Emprestimos</h2>
         </div>
         <div class="panel-body">
             <!-- Mensagens vindas do CriancaController -->
             <c:out value="${mensagem}" escapeXml="false"/>
 
-            <!-- Formul·rio que envia dados para o CriancaController -->
+            <!-- Formul√°rio que envia dados para o CriancaController -->
             <form onsubmit="return false;" class="form-horizontal">
                 <fieldset>
                     <input type="hidden" name="id" id="id" value="${emprestimo.id!=null?emprestimo.id:0}">
@@ -38,16 +38,16 @@
                     </div>    
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="control-label" >CÛdigo de barras</label>  
+                            <label class="control-label" >C√≥digo de barras</label>  
                             <input class="form-control" id="codigoBarras">
                         </div>
                     </div>
                     <div class="form-row">
                        <div class="form-group col-md-6">
-                            <label class="control-label">Data de</label> <br>
-                            <input type="date" id="dataDe" class="form-control">
-                            <label class="control-label">Data atÈ</label> <br>
-                            <input type="date" id="dataAte" class="form-control">
+                            <label class="control-label">Ano de</label> <br>
+                            <input type="number" id="anoDe" class="form-control" value="${emprestimo.anode!=null?emprestimo.anode:""}">>
+                            <label class="control-label">Ano at√©</label> <br>
+                            <input type="number" id="anoAte" class="form-control" value="${emprestimo.anoate!=null?emprestimo.anoate:""}">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Status</label>
@@ -73,6 +73,6 @@
         </div>
     </div>
 </div>
-<!-- RodapÈ da P·gina -->
+<!-- Rodap√© da P√°gina -->
 <jsp:include page="../inc/rodape.inc.jsp" />
 <script src="../js/cademprestimos.js" type="text/javascript" charset="utf-8"></script>
