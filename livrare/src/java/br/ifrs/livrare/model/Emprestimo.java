@@ -31,6 +31,10 @@ public class Emprestimo implements Serializable {
     public int getAnode() {
         return anode;
     }
+    
+    public boolean getAtivo() {
+        return this.ativo;
+    }
 
     public void setAnode(int anode) {
         this.anode = anode;

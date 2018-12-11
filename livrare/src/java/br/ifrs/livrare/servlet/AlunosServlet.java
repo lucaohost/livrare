@@ -44,7 +44,7 @@ public class AlunosServlet extends HttpServlet {
         String matricula = request.getParameter("matricula") != null ? request.getParameter("matricula").trim() : "";
         String turma = request.getParameter("turma") != null ? request.getParameter("turma").trim() : "";
 
-        if(id != -1){
+        if (id != -1) {
             aluno.setId(id);
         }
         aluno.setMatricula(matricula);
@@ -129,53 +129,56 @@ public class AlunosServlet extends HttpServlet {
             }
         } else if (acao.equals("select")) {
             try {
-                retorno = "<select id='aluno' class='form-control'>";
+                retorno = "<select id='aluno' class='form-control' required onchange='listarAlunos()'>";
                 retorno += "<option value=''>Selecione...</option>";
                 List<Aluno> alunos = dao.pesquisar(pesquisa);
                 for (Aluno alu : alunos) {
-                    retorno += "<option value='"+alu.getId()+"'>"+alu.getNome()+"</option>";
+                    retorno += "<option value='" + alu.getId() + "'>" + alu.getNome() + "</option>";
                 }
                 retorno += "</select>";
-            }catch(Exception ex) {
+            } catch (Exception ex) {
                 retorno = ex.toString();
             }
         } else if (acao.equals("emprestimos")) {
             Aluno aluno1;
             try {
-                 retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
-                    + "                <thead class='thead-dark text-center'>"
-                    + "                    <tr>"
-                    + "                        <th>Livro</th>"
-                    + "                        <th>Aluno</th>"
-                    + "                        <th>Ação</th>"
-                    + "                    </tr>"
-                    + "                </thead>"
-                    + "                <tbody>";
+                retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
+                        + "                <thead class='thead-dark text-center'>"
+                        + "                    <tr>"
+                        + "                        <th>Livro</th>"
+                        + "                        <th>Aluno</th>"
+                        + "                        <th>Ação</th>"
+                        + "                    </tr>"
+                        + "                </thead>"
+                        + "                <tbody>";
                 aluno1 = dao.obter(id);
                 List<Emprestimo> emprestimos = aluno1.getEmprestimosFeitos();
-                for(Emprestimo emp : emprestimos){
-                     retorno += "<tr>"
-                            + "<td>" + emp.getAluno().getNome()+ "</td>"
-                            + "<td width='15%'>" + emp.getLivroAlocado().getLivro().getNome() + "</td>"
-                            + "<td width='15%'>"
-                            + "<a class='text-dark' href='#' onclick='alterar(" + emp.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Alterar"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='devolver(" + emp.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Devolver"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='excluir(" + emp.getId() + ");'>"
-                            + "<i class='fa fa-trash'></i>Excluir"
-                            + "</a>"
-                            + "</td>"
-                            + "</tr>";
+                for (Emprestimo emp : emprestimos) {
+                    if (emp.getAtivo()) {
+                        retorno += "<tr>"
+                                + "<td>" + emp.getLivroAlocado().getLivro().getNome() + "</td>"
+                                + "<td width='15%'>" + emp.getAluno().getNome() + "</td>"
+                                + "<td width='15%'>"
+                                + "<a class='text-dark' href='#' onclick='alterar(" + emp.getId() + ");'>"
+                                + "<i class='fa fa-edit'>"
+                                + "</i>"
+                                + " Alterar"
+                                + "</a> <br>"
+                                + "<a class='text-dark' href='#' onclick='devolver(" + emp.getId() + ");'>"
+                                + "<i class='fa fa-book'>"
+                                + "</i>"
+                                + " Devolver"
+                                + "</a> <br>"
+                                + "<a class='text-dark' href='#' onclick='excluir(" + emp.getId() + ");'>"
+                                + "<i class='fa fa-trash'></i> Excluir"
+                                + "</a>"
+                                + "</td>"
+                                + "</tr>";
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                retorno = ex.toString();
             }
             retorno += "</tbody>"
                     + "</table>";

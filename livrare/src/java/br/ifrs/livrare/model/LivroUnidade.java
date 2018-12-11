@@ -22,6 +22,14 @@ public class LivroUnidade implements Serializable {
     @OneToMany(mappedBy = "livroAlocado", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Emprestimo> emprestimosEnvolvidos = new ArrayList<>();
 
+    public List<Emprestimo> getEmprestimosEnvolvidos() {
+        return emprestimosEnvolvidos;
+    }
+
+    public void setEmprestimosEnvolvidos(List<Emprestimo> emprestimosEnvolvidos) {
+        this.emprestimosEnvolvidos = emprestimosEnvolvidos;
+    }
+
     public int getId() {
         return id;
     }

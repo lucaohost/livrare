@@ -45,7 +45,7 @@ public class EmprestimoDAO {
     
     public List<Emprestimo> pesquisar() throws Exception {
         this.em = EntityManagerProvider.getInstance();
-        TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c order by c.nome", Emprestimo.class);
+        TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c order by c.id DESC", Emprestimo.class);
         List<Emprestimo> emprestimos = query.getResultList();
         this.em.close();
         return emprestimos;

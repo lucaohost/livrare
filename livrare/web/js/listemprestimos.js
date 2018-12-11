@@ -65,17 +65,17 @@ function devolver(id) {
             },
         },
     }).then((a) => {
-        var estado = '';
-        if(a == 1) {
-            estado = "BOM";
-        } else if(a == 2) {
-            estado = "RUIM";
+        var estado1 = '';
+        if (a == 1) {
+            estado1 = "BOM";
+        } else if (a == 2) {
+            estado1 = "RUIM";
         } else {
-            estado = "EXTRAVIADO";
+            estado1 = "EXTRAVIADO";
         }
         $.ajax({
-            url: '/livrare/EmprestimoServlet',
-            data: {id: id, estado: estado, acao: 'devolver'}
+            url: '/livrare/EmprestimosServlet',
+            data: {id: id, estado: estado1, acao: 'devolver'}
         }).done(function (retorno) {
             if (retorno == "true") {
                 swal({
@@ -110,16 +110,22 @@ function listAlunos() {
     });
 }
 
-$('#aluno').change(function(){
+function listarAlunos() {
     $.ajax({
         url: '/livrare/AlunosServlet',
         method: "get",
-        data: {pesquisa: $('#pesquisa').val(), acao: 'emprestimos'}
+        data: {id: $('#aluno').val(), acao: 'emprestimos'}
     }).done(function (retorno) {
         $('#listagem').html(retorno);
     });
-});
+}
 
-$('#aluno').change(function(){
-    
-});
+function atualizarUnidades() {
+    $.ajax({
+        url: '/livrare/LivrosDidaticosServlet',
+        method: "get",
+        data: {id: $('#livro').val(), acao: 'emprestimos'}
+    }).done(function (retorno) {
+        $('#listagem').html(retorno);
+    });
+}

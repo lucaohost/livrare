@@ -73,7 +73,7 @@ public class LivrosUnidadesServlet extends HttpServlet {
 
         try {
             if (acao.equals("select")) {
-                retorno = "<select id='livroUnidade' class='form-control'>";
+                retorno = "<select id='livroUnidade' class='form-control' required>";
                 retorno += "<option value=''>Selecione...</option>";
                 LivroDidatico livroD = dao.obter(id);
                 List<LivroUnidade> livrosUnidades = livroD.getLivros();

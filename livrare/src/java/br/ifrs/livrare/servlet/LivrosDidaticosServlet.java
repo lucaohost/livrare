@@ -4,7 +4,9 @@ import br.ifrs.livrare.dao.CategoriaDAO;
 import br.ifrs.livrare.dao.LivroDidaticoDAO;
 import br.ifrs.livrare.model.Aluno;
 import br.ifrs.livrare.model.Categoria;
+import br.ifrs.livrare.model.Emprestimo;
 import br.ifrs.livrare.model.LivroDidatico;
+import br.ifrs.livrare.model.LivroUnidade;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
@@ -76,6 +78,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LivroDidaticoDAO dao = new LivroDidaticoDAO();
         String acao = request.getParameter("acao").trim();
+        Long id = request.getParameter("id") != null ? Long.parseLong(request.getParameter("id").trim()) : 0;
         String retorno = "false";
 
         try {
@@ -142,13 +145,59 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 view.forward(request, response);
             }
             if (acao.equals("select")) {
-                retorno = "<select id='livro' class='form-control' onchange='atualizarUnidades()'>";
+                retorno = "<select id='livro' class='form-control' onchange='atualizarUnidades()' required>";
                 retorno += "<option value=''>Selecione...</option>";
                 List<LivroDidatico> livros = dao.pesquisar("");
                 for (LivroDidatico liv : livros) {
-                    retorno += "<option value='"+liv.getId()+"'>"+liv.getNome()+"</option>";
+                    retorno += "<option value='" + liv.getId() + "'>" + liv.getNome() + "</option>";
                 }
                 retorno += "</select>";
+            }
+            if (acao.equals("emprestimos")) {
+                LivroDidatico livr;
+                try {
+                    retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
+                            + "                <thead class='thead-dark text-center'>"
+                            + "                    <tr>"
+                            + "                        <th>Livro</th>"
+                            + "                        <th>Aluno</th>"
+                            + "                        <th>Ação</th>"
+                            + "                    </tr>"
+                            + "                </thead>"
+                            + "                <tbody>";
+                    livr = dao.obter(id);
+                    List<LivroUnidade> unidades = livr.getLivros();
+                    for (LivroUnidade un : unidades) {
+                        List<Emprestimo> emprestimos = un.getEmprestimosEnvolvidos();
+                        for (Emprestimo emp : emprestimos)
+                        if (emp.getAtivo()) {
+                            retorno += "<tr>"
+                                    + "<td>" + emp.getLivroAlocado().getLivro().getNome() + "</td>"
+                                    + "<td width='15%'>" + emp.getAluno().getNome() + "</td>"
+                                    + "<td width='15%'>"
+                                    + "<a class='text-dark' href='#' onclick='alterar(" + emp.getId() + ");'>"
+                                    + "<i class='fa fa-edit'>"
+                                    + "</i>"
+                                    + " Alterar"
+                                    + "</a> <br>"
+                                    + "<a class='text-dark' href='#' onclick='devolver(" + emp.getId() + ");'>"
+                                    + "<i class='fa fa-book'>"
+                                    + "</i>"
+                                    + " Devolver"
+                                    + "</a> <br>"
+                                    + "<a class='text-dark' href='#' onclick='excluir(" + emp.getId() + ");'>"
+                                    + "<i class='fa fa-trash'></i> Excluir"
+                                    + "</a>"
+                                    + "</td>"
+                                    + "</tr>";
+                        }
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    retorno = ex.toString();
+                }
+                retorno += "</tbody>"
+                        + "</table>";
             }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);

@@ -33,7 +33,7 @@ public class EmprestimoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EmprestimoDAO dao = new EmprestimoDAO();
         Emprestimo emprestimo = new Emprestimo();
-        
+
         LivroUnidadeDAO daoUnidade = new LivroUnidadeDAO();
         LivroUnidade livroUnidade = new LivroUnidade();
 
@@ -45,18 +45,22 @@ public class EmprestimoServlet extends HttpServlet {
         int alunoId = request.getParameter("aluno") != null ? Integer.parseInt(request.getParameter("aluno")) : 0;
         Aluno aluno = new Aluno();
         aluno.setId(alunoId);
-        int livroId = request.getParameter("livroUnidade") != null ? Integer.parseInt(request.getParameter("livroUnidade")) : 0;
+        int livroId = request.getParameter("livro") != null ? Integer.parseInt(request.getParameter("livro")) : 0;
         LivroUnidade livro = new LivroUnidade();
         livro.setId(livroId);
-        boolean ativo = request.getParameter("status") != null ?Boolean.parseBoolean(request.getParameter("status")):false;
         int anode = request.getParameter("anode") != null ? Integer.parseInt(request.getParameter("anode").trim()) : 0;
         int anoate = request.getParameter("anoate") != null ? Integer.parseInt(request.getParameter("anoate").trim()) : 0;
+        int ativo = request.getParameter("status") != null ? Integer.parseInt(request.getParameter("status").trim()) : 1;
         String estado = request.getParameter("estado") != null ? request.getParameter("estado").trim() : "";
-        
+
         emprestimo.setId(id);
         emprestimo.setAluno(aluno);
         emprestimo.setLivroAlocado(livro);
-        emprestimo.setAtivo(ativo);
+        if (ativo == 1) {
+            emprestimo.setAtivo(true);
+        } else {
+            emprestimo.setAtivo(false);
+        }
         emprestimo.setAnode(anode);
         emprestimo.setAnoate(anoate);
         emprestimo.setEstado(estado);
@@ -94,27 +98,29 @@ public class EmprestimoServlet extends HttpServlet {
                     + "                <tbody>";
 
             try {
-                List<Emprestimo> emprestimos = dao.pesquisar(pesquisa);
+                List<Emprestimo> emprestimos = dao.pesquisar();
                 for (Emprestimo alu : emprestimos) {
-                    retorno += "<tr>"
-                            + "<td>" + alu.getAluno().getNome()+ "</td>"
-                            + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
-                            + "<td width='15%'>"
-                            + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Alterar"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Devolver"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-trash'></i>Excluir"
-                            + "</a>"
-                            + "</td>"
-                            + "</tr>";
+                    if (alu.getAtivo()) {
+                        retorno += "<tr>"
+                                + "<td>" + alu.getAluno().getNome() + "</td>"
+                                + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
+                                + "<td width='15%'>"
+                                + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-edit'>"
+                                + "</i>"
+                                + "Alterar"
+                                + "</a> <br> "
+                                + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-book'>"
+                                + "</i>"
+                                + "Devolver"
+                                + "</a> <br> "
+                                + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-trash'></i>Excluir"
+                                + "</a>"
+                                + "</td>"
+                                + "</tr>";
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,25 +144,27 @@ public class EmprestimoServlet extends HttpServlet {
             try {
                 List<Emprestimo> emprestimos = dao.atrasados();
                 for (Emprestimo alu : emprestimos) {
-                    retorno += "<tr>"
-                            + "<td>" + alu.getAluno().getNome()+ "</td>"
-                            + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
-                            + "<td width='15%'>"
-                            + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Alterar"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-edit'>"
-                            + "</i>"
-                            + "Devolver"
-                            + "</a> | "
-                            + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
-                            + "<i class='fa fa-trash'></i>Excluir"
-                            + "</a>"
-                            + "</td>"
-                            + "</tr>";
+                    if (alu.getAtivo()) {
+                        retorno += "<tr>"
+                                + "<td>" + alu.getAluno().getNome() + "</td>"
+                                + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
+                                + "<td width='15%'>"
+                                + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-edit'>"
+                                + "</i>"
+                                + "Alterar"
+                                + "</a> <br> "
+                                + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-book'>"
+                                + "</i>"
+                                + "Devolver"
+                                + "</a> <br> "
+                                + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-trash'></i>Excluir"
+                                + "</a>"
+                                + "</td>"
+                                + "</tr>";
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,10 +190,12 @@ public class EmprestimoServlet extends HttpServlet {
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
                 retorno = ex.toString();
             }
-        } else if(acao.equals("devolver")){
-            emprestimo.setEstado(estado);
+        } else if (acao.equals("devolver")) {
             try {
-                dao.atualizar(emprestimo);
+                Emprestimo aux = dao.obter(id);
+                aux.setEstado(estado);
+                aux.setAtivo(false);
+                dao.atualizar(aux);
                 retorno = "true";
             } catch (Exception ex) {
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
