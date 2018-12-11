@@ -14,7 +14,6 @@
             <h2 class="panel-title text-center">Gestão de Emprestimos</h2>
         </div>
         <div class="panel-body">
-
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="control-label">Livro</label>  
@@ -25,24 +24,19 @@
                     <div id="selectAlunos"></div>
                 </div>
             </div>   
-
+            <hr>
             <!-- Formulário de pesquisa -->
             <form onsubmit="return false;" class="form-horizontal">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-secondary" id="atrasados" onclick="buscarAtrasados()">
-                            Atrasados
-                        </button>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button class="btn btn-secondary btn-lg btn-block" id="atrasados" onclick="buscarAtrasados()"><i class="fa fa-clock"></i> Atrasados</button>
                     </div>
-                    <input class="form-control border-secondary py-2" type="search" id="pesquisa" name="pesquisa" placeholder="Pesquisar...">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" id="pesquisar" onclick="buscar()">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    <div class="form-group col-md-6">
+                         <button class="btn btn-primary btn-lg btn-block" id="pesquisar" onclick="buscar()"><i class="fa fa-sync"></i> Atualizar</button>
                     </div>
                 </div>              
-                <br>
             </form>
+            <br>
             <!-- Listagem -->
             <div id="listagem"></div>                 
         </div>

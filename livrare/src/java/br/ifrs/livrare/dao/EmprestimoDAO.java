@@ -1,6 +1,7 @@
 package br.ifrs.livrare.dao;
 
 import br.ifrs.livrare.model.Emprestimo;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -52,8 +53,10 @@ public class EmprestimoDAO {
     }
     
     public List<Emprestimo> atrasados() throws Exception {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
         this.em = EntityManagerProvider.getInstance();
-        TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c where c.anoate < '2018'", Emprestimo.class);
+        TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c where c.anoate < '"+year+"'", Emprestimo.class);
         List<Emprestimo> emprestimos = query.getResultList();
         this.em.close();
         return emprestimos;
