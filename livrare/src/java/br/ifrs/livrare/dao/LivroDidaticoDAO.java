@@ -43,10 +43,6 @@ public class LivroDidaticoDAO {
         query.setParameter("nome", "%" + nome.toLowerCase() + "%");
         List<LivroDidatico> livros = query.getResultList();
         this.em.close();
-        // preenche livros com null para biblioteca GSON conseguir converter
-        for (LivroDidatico livro : livros) {
-            livro.setFotoCapa(null);
-        }
         return livros;
     }
 
