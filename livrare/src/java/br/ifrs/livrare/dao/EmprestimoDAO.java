@@ -54,6 +54,7 @@ public class EmprestimoDAO {
     public List<Emprestimo> atrasados(String pesquisa) throws Exception {
         this.em = EntityManagerProvider.getInstance();
         TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c where c.dataate > CURRENT_TIMESTAMP() and lower(c.nome) like :pesquisa order by c.nome", Emprestimo.class);
+        query.setParameter("pesquisa", "%"+pesquisa.toLowerCase()+"%"); 
         List<Emprestimo> emprestimos = query.getResultList();
         this.em.close();
         return emprestimos;

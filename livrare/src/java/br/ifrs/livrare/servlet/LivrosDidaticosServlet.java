@@ -42,7 +42,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 livro.setFotoCapa("link");
                 dao.salvar(livro);
                 retorno = "true";
-            }
+            } 
 //            else if (acao.equals("excluir")) {
 //                long id = Long.parseLong(request.getParameter("id"));
 //                dao.excluir(id);
@@ -65,6 +65,7 @@ public class LivrosDidaticosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoriaDAO dao = new CategoriaDAO();
+        LivroDidaticoDAO daoLivro = new LivroDidaticoDAO();
         Gson gson = new Gson();
         String acao = request.getParameter("acao").trim();
         String retorno = "false";
@@ -74,6 +75,14 @@ public class LivrosDidaticosServlet extends HttpServlet {
                 String pesquisa = request.getParameter("pesquisa") != null ? request.getParameter("pesquisa").trim() : "";
                 List<Categoria> categorias = dao.pesquisar(pesquisa);
                 retorno = gson.toJson(categorias);
+            } else if (acao.equals("select")) {
+                retorno = "<select id='livro' class='form-control'>";
+                retorno += "<option value=''>Selecione...</option>";
+                List<LivroDidatico> livros = daoLivro.pesquisar("");
+                for (LivroDidatico liv : livros) {
+                    retorno += "<option value='"+liv.getId()+"'>"+liv.getNome()+"</option>";
+                }
+                retorno += "</select>";
             }
         } catch (Exception e) {
             Logger.getLogger(LivrosDidaticosServlet.class.getName()).log(Level.SEVERE, null, e);

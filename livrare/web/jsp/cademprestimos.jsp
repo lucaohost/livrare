@@ -20,7 +20,7 @@
             <!-- Formulário que envia dados para o CriancaController -->
             <form onsubmit="return false;" class="form-horizontal">
                 <fieldset>
-                    <input type="hidden" name="id" id="id" value="${aluno.id!=null?aluno.id:""}">
+                    <input type="hidden" name="id" id="id" value="${emprestimo.id!=null?emprestimo.id:0}">
                     <div class="row">
                         <div class="col">
                             <div class="alert" id="retorno"></div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Status</label>
-                            <select id="selectStatus" disabled class="form-control">
+                            <select id="status" disabled class="form-control">
                                 <option value="1">Ativo</option>
                                 <option value="0">Inativo</option>
                             </select>
