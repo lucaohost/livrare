@@ -51,6 +51,14 @@ public class EmprestimoDAO {
         return emprestimos;
     }
     
+    public List<Emprestimo> atrasados(String pesquisa) throws Exception {
+        this.em = EntityManagerProvider.getInstance();
+        TypedQuery<Emprestimo> query = this.em.createQuery("Select c from Emprestimo c where c.dataate > CURRENT_TIMESTAMP() and lower(c.nome) like :pesquisa order by c.nome", Emprestimo.class);
+        List<Emprestimo> emprestimos = query.getResultList();
+        this.em.close();
+        return emprestimos;
+    }
+    
     public List<Emprestimo> pesquisar(String nome) throws Exception {
         this.em = EntityManagerProvider.getInstance();
         TypedQuery<Emprestimo> query = this.em.createQuery(" Select c from Emprestimo c left join Aluno a on a.id = c.aluno_id left join livro l on l.id = c.livro_unidade_id where lower(a.nome) like :nome or lower(l.nome) like :nome order by c.nome",Emprestimo.class);

@@ -3,7 +3,7 @@
 <!-- Verifica as condições de acesso ao sistema -->
 <!-- include_once './inc/acesso.inc.php'; -->
 <!-- Cabeçalho da Página -->
-<c:import url="../inc/cabecalho.inc.jsp">
+<c:import url="cabecalho.inc.jsp">
     <c:param name="pageName" value="Alunos" />
 </c:import>
 
@@ -29,21 +29,21 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="control-label" for="matricula">Número da matrícula</label>  
-                            <input id="matricula" name="matricula" type="number" placeholder="Digite o número da matrícula" class="form-control" required="" value="${aluno.nome!=null?aluno.nome:""}">
+                            <input id="matricula" name="matricula" type="number" placeholder="Digite o número da matrícula" class="form-control" required="" value="${aluno.matricula!=null?aluno.matricula:""}">
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label" for="curso">Curso</label>  
-                            <input id="curso" name="curso" type="text" placeholder="Digite o curso" class="form-control" required="" value="${aluno.nome!=null?aluno.nome:""}">
+                            <input id="curso" name="curso" type="text" placeholder="Digite o curso" class="form-control" required="" value="${aluno.curso!=null?aluno.curso:""}">
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label" for="turma">Turma</label>  
-                            <input id="turma" name="turma" type="text" placeholder="Digite a turma" class="form-control" required="" value="${aluno.nome!=null?aluno.nome:""}">
+                            <input id="turma" name="turma" type="text" placeholder="Digite a turma" class="form-control" required="" value="${aluno.turma!=null?aluno.turma:""}">
                         </div>
                     </div>          
                     <div class="form-group">
                         <div class="alert" style="display: none;" id="msgEmail"></div>
                         <label class="control-label" for="nome">Nome</label>  
-                        <input id="nome" name="nome" type="text" placeholder="Digite o nome" class="form-control" required="" value="${aluno.email!=null?aluno.email:""}">
+                        <input id="nome" name="nome" type="text" placeholder="Digite o nome" class="form-control" required="" value="${aluno.nome!=null?aluno.nome:""}">
                     </div>                    
                     <div class="form-group">
                         <div class="alert" style="display: none;" id="msgEmail"></div>
@@ -67,5 +67,5 @@
     </div>
 </div>
 <!-- Rodapé da Página -->
-<jsp:include page="../inc/rodape.inc.jsp" />
-<script src="../js/cadalunos.js" type="text/javascript" charset="utf-8"></script>
+<jsp:include page="rodape.inc.jsp" />
+<script src="/livrare/js/cadalunos.js" type="text/javascript" charset="utf-8"></script>

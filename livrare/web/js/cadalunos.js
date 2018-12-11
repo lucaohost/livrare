@@ -1,7 +1,8 @@
 $('#salvar').click(function () {
+    var acao = $('#id').val() != '' ? 'atualizar' : 'salvar'
     $.ajax({
-        url: '../AlunosServlet',
-        data: {id: $('#id').val() != '' ? $('#id').val() : '-1', matricula: $('#matricula').val(), curso: $('#curso').val(), turma: $('#turma').val(), nome: $('#nome').val(), email: $('#email').val(), acao: 'salvar'}
+        url: '/livrare/AlunosServlet',
+        data: {id: $('#id').val() != '' ? $('#id').val() : '-1', matricula: $('#matricula').val(), curso: $('#curso').val(), turma: $('#turma').val(), nome: $('#nome').val(), email: $('#email').val(), acao: acao}
     }).done(function (retorno) {
         if (retorno == "true" && $('#id').val() == '') {
             swal({
@@ -18,7 +19,7 @@ $('#salvar').click(function () {
                 dangerMode: true,
             }).then((value) => {
                  if (value == 'listagem') {
-                        window.location.href = "listalunos.jsp";
+                        window.location.href = "/livrare/jsp/listalunos.jsp";
                  } else {
                     limparCampos();
                  }
@@ -38,7 +39,7 @@ $('#salvar').click(function () {
                 dangerMode: true,
             }).then((value) => {
                  if (value == 'listagem') {
-                        window.location.href = "listalunos.jsp";
+                        window.location.href = "/livrare/jsp/listalunos.jsp";
                  } else {
                     limparCampos();
                  }

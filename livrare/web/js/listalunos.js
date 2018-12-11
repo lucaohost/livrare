@@ -2,7 +2,7 @@ buscar();
 
 function buscar() {
     $.ajax({
-        url: '../AlunosServlet',
+        url: '/livrare/AlunosServlet',
         method: "get",
         data: {pesquisa: $('#pesquisa').val(), acao: 'buscar'}
     }).done(function (retorno) {
@@ -20,7 +20,7 @@ function excluir(id) {
     }).then((willDelete) => {
         if (willDelete) {
             $.ajax({
-                url: '../AlunosServlet',
+                url: '/livrare/AlunosServlet',
                 data: {id: id, acao: 'excluir'}
             }).done(function (retorno) {
                 if (retorno == 'true') {
@@ -40,10 +40,5 @@ function excluir(id) {
 }
 
 function alterar(id) {
-     $.ajax({
-                url: '../AlunosServlet',
-                data: {id: id, acao: 'atualizar'}
-            }).done(function (retorno) {
-                window.location.href = "cadalunos.jsp";
-            });
+    window.location.href = '/livrare/AlunoController?acao=atualizar&id=' + id;
 }

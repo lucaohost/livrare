@@ -34,4 +34,4 @@
 </div>
 <!-- Rodapé da Página -->
 <jsp:include page="rodape.inc.jsp" />
-<script src="../js/listalunos.js" type="text/javascript" charset="utf-8"></script>
+<script src="/livrare/js/listalunos.js" type="text/javascript" charset="utf-8"></script>
