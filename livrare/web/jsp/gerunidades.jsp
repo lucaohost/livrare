@@ -24,7 +24,7 @@
                     <div class="form-row text-center">
                         <div class="col-8">
                             <div class="form-group col-md-6">
-                                <label class="control-label" for="curso">Cadastrar Unidades</label>  
+                                <label class="control-label" for="quantidade">Cadastrar Unidades</label>  
                                 <div class="input-group">
                                     <input id="quantidade" name="quantidade" type="number" placeholder="Quantidade de Unidades" class="form-control">
                                     <input name="acao" type="submit" class="btn-primary rounded-right" value="Adicionar">

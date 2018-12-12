@@ -48,15 +48,12 @@ public class LivrosUnidadesServlet extends HttpServlet {
                     lu.setLivro(ld);
                     dao.salvar(lu);
                     proximoId++;
-
-                    LivroDidatico livroDidatico = daolivro.obter(idLivroDidatico);
-                    request.setAttribute("livro", livroDidatico);
-                    CategoriaDAO daoCat = new CategoriaDAO();
-                    List<Categoria> categorias = daoCat.pesquisar("");
-                    request.setAttribute("categorias", categorias);
-                    RequestDispatcher view = request.getRequestDispatcher("/jsp/gerunidades.jsp");
-                    view.forward(request, response);
                 }
+
+                LivroDidatico livroDidatico = daolivro.obter(idLivroDidatico);
+                request.setAttribute("livro", livroDidatico);
+                RequestDispatcher view = request.getRequestDispatcher("/jsp/gerunidades.jsp");
+                view.forward(request, response);
 
             }
         } catch (Exception e) {
@@ -64,7 +61,7 @@ public class LivrosUnidadesServlet extends HttpServlet {
             retorno = e.toString();
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LivroDidaticoDAO dao = new LivroDidaticoDAO();
@@ -79,8 +76,8 @@ public class LivrosUnidadesServlet extends HttpServlet {
                 LivroDidatico livroD = dao.obter(id);
                 List<LivroUnidade> livrosUnidades = livroD.getLivros();
                 for (LivroUnidade liv : livrosUnidades) {
-                    if(liv.getEmprestimosEnvolvidos().size() <= 0) {
-                        retorno += "<option value='"+liv.getId()+"'>"+liv.getCodigoDeBarras()+"</option>";
+                    if (liv.getEmprestimosEnvolvidos().size() <= 0) {
+                        retorno += "<option value='" + liv.getId() + "'>" + liv.getCodigoDeBarras() + "</option>";
                     }
                 }
                 retorno += "</select>";
