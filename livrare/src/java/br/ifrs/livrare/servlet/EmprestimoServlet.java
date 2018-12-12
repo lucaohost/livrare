@@ -105,19 +105,11 @@ public class EmprestimoServlet extends HttpServlet {
                                 + "<td>" + alu.getAluno().getNome() + "</td>"
                                 + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
                                 + "<td width='15%'>"
-                                + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
-                                + "<i class='fa fa-edit'>"
-                                + "</i>"
-                                + "Alterar"
-                                + "</a> <br> "
                                 + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
                                 + "<i class='fa fa-book'>"
                                 + "</i>"
                                 + "Devolver"
-                                + "</a> <br> "
-                                + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
-                                + "<i class='fa fa-trash'></i>Excluir"
-                                + "</a>"
+                                + "</a> "
                                 + "</td>"
                                 + "</tr>";
                     }
@@ -149,18 +141,10 @@ public class EmprestimoServlet extends HttpServlet {
                                 + "<td>" + alu.getAluno().getNome() + "</td>"
                                 + "<td width='15%'>" + alu.getLivroAlocado().getLivro().getNome() + "</td>"
                                 + "<td width='15%'>"
-                                + "<a class='text-dark' href='#' onclick='alterar(" + alu.getId() + ");'>"
-                                + "<i class='fa fa-edit'>"
-                                + "</i>"
-                                + "Alterar"
-                                + "</a> <br> "
                                 + "<a class='text-dark' href='#' onclick='devolver(" + alu.getId() + ");'>"
                                 + "<i class='fa fa-book'>"
                                 + "</i>"
                                 + "Devolver"
-                                + "</a> <br> "
-                                + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
-                                + "<i class='fa fa-trash'></i>Excluir"
                                 + "</a>"
                                 + "</td>"
                                 + "</tr>";
@@ -176,7 +160,7 @@ public class EmprestimoServlet extends HttpServlet {
 
         } else if (acao.equals("excluir")) {
             try {
-                dao.excluir(emprestimo.getId());
+                dao.excluir(id);
                 retorno = "true";
             } catch (Exception ex) {
                 Logger.getLogger(EmprestimoServlet.class.getName()).log(Level.SEVERE, null, ex);
