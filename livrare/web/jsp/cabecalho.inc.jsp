@@ -59,6 +59,15 @@
                                     <a class="dropdown-item" href="/livrare/jsp/cademprestimos.jsp">Adicionar</a>                      
                                 </div>
                             </li>
+                            <li class="nav-item dropdown <%= (pageName.equalsIgnoreCase("Usuarios")) ? "active" : ""%>">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Usuarios <%= (pageName.equalsIgnoreCase("Usuarios")) ? "<span class='sr-only'>(current)</span>" : ""%>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/livrare/jsp/listusuario.jsp">Listar</a>
+                                    <a class="dropdown-item" href="/livrare/jsp/cadusuario.jsp">Adicionar</a>                      
+                                </div>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/livrare/UsuariosServlet?acao=sair">Sair</a>
                             </li>

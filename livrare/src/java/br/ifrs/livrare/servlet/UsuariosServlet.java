@@ -128,6 +128,60 @@ public class UsuariosServlet extends HttpServlet {
                 }
             }
 
+            if (acao.equals("salvar")) {
+                String nome = request.getParameter("nome");
+                String email = request.getParameter("email");
+                String senha = request.getParameter("senha");
+
+                Usuario user = new Usuario();
+                user.setEmail(email);
+                user.setNome(nome);
+                user.setSenha(senha);
+                dao.salvar(user);
+            }
+            
+            if (acao.equals("excluir")) {
+                int id = Integer.parseInt(request.getParameter("id").toLowerCase());
+                dao.excluir(id);
+            }
+
+            if (acao.equals("buscar")) {
+                
+                String pesquisa = request.getParameter("pesquisa").toLowerCase();
+
+                retorno = "<table class='table table-striped table-bordered table-condensed table-hover'>"
+                        + "                <thead class='thead-dark text-center'>"
+                        + "                    <tr>"
+                        + "                        <th>Nome</th>"
+                        + "                        <th>Email</th>"
+                        + "                        <th>Ação</th>"
+                        + "                    </tr>"
+                        + "                </thead>"
+                        + "                <tbody>";
+
+                try {
+                    List<Usuario> users = dao.pesquisar(pesquisa);
+                    for (Usuario alu : users) {
+                        retorno += "<tr>"
+                                + "<td>" + alu.getNome() + "</td>"
+                                + "<td width='15%'>" + alu.getEmail()+ "</td>"
+                                + "<td width='15%'>"
+                                + "<a class='text-dark' href='#' onclick='excluir(" + alu.getId() + ");'>"
+                                + "<i class='fa fa-trash'></i>Excluir"
+                                + "</a>"
+                                + "</td>"
+                                + "</tr>";
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    retorno = ex.toString();
+                }
+
+                retorno += "</tbody>"
+                        + "</table>";
+                
+            }
+
 //            if (acao.equalsIgnoreCase("atualizar")) {
 //                int idUsuarioDB = Integer.parseInt(request.getParameter("id"));
 //                Usuario usuarioDB = this.dao.obter(idUsuarioDB);
@@ -144,9 +198,9 @@ public class UsuariosServlet extends HttpServlet {
 //                request.setAttribute("mensagem", mensagem);
 //            }
         } catch (Exception ex) {
-
+            String ret = ex.toString();
             forward = "/jsp/login.jsp";
-            request.setAttribute("mensagem", ex.toString());
+            request.setAttribute("mensagem", ret);
         } finally {
             response.setContentType("text/plain");
             response.getWriter().write(retorno);
